@@ -11,6 +11,7 @@ struct Parametrs
 	double y_pos;
 	double acñeleration_x;
 	double añcelereation_y;
+	int a;
 
 	Parametrs(double velocity_x, double velocity_y, double x_pos, double y_pos, double acñeleration_x, double acñelereation_y)
 		:velocity_x(velocity_x), velocity_y(velocity_y), x_pos(x_pos), y_pos(y_pos), 
