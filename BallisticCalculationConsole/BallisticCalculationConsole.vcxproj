@@ -127,7 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BallisticCalculationConsole.cpp" />
+    <ClCompile Include="Calculations.cpp" />
+    <ClCompile Include="ConsoleOutput.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Calculations.h" />
+    <ClInclude Include="ConsoleOutput.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
