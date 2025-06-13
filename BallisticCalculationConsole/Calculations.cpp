@@ -13,7 +13,7 @@ double Calculations::calculate_y_pos(double time) const
 
 	return y_pos;
 }
-
+	
 double Calculations::calculate_velocity_y(double time) const
 {
 	if (time < 0) throw std::invalid_argument("Calculations -> calculate_x_pos() -> (time < 0)");
