@@ -1,42 +1,41 @@
 #pragma once
-
 #include <math.h>
 #include <iostream>
 
+constexpr double g = 9.8;
+
 struct Parametrs
 {
-	double velocity_x;
-	double velocity_y;
-	double x_pos;
-	double y_pos;
-	double acñeleration_x;
-	double añcelereation_y;
-	int a;
+	const double start_velocity_;		 //íà÷àëüíàÿ ñêîðîñòü áðîñêà
+	const double angle_;				 //óãîë áðîñêà
+	const double start_x_pos_;			 //íà÷àëüíàÿ êîîðäèíàòà ïî îñè x
+	const double start_y_pos_;			 //íà÷àëüíàÿ êîîðäèíàòà ïî îñè y
+	const double acñeleration_x_;
+	const double añcelereation_y_;
 
-	Parametrs(double velocity_x, double velocity_y, double x_pos, double y_pos, double acñeleration_x, double acñelereation_y)
-		:velocity_x(velocity_x), velocity_y(velocity_y), x_pos(x_pos), y_pos(y_pos), 
-		acñeleration_x(acñeleration_x), añcelereation_y(acñelereation_y)
-	{
+	const double start_velocity_x_;		 //íà÷àëüíàÿ ñêîðîñòü ïî îñè x
+	const double start_velocity_y_;		 //íà÷àëüíàÿ ñêîðîñòü ïî îñè y
 
-	}
-	Parametrs(const Parametrs& other) :velocity_x(other.velocity_x), velocity_y(other.velocity_y),
-		x_pos(other.x_pos), y_pos(other.y_pos),
-		acñeleration_x(other.acñeleration_x), añcelereation_y(other.añcelereation_y)
-	{
+	Parametrs(double start_velocity, double angle, double start_x_pos, double start_y_pos, 
+		double acñeleration_x = 0, double añcelereation_y = g)
 
-	}
-	Parametrs& operator= (const Parametrs& other)
-	{
-		this->velocity_x = other.velocity_x;
-		this->velocity_y = other.velocity_y;
-		this->x_pos = other.x_pos;
-		this->y_pos = other.y_pos;
-		this->acñeleration_x = other.acñeleration_x;
-		this->añcelereation_y = other.añcelereation_y;
-	}
+		:start_velocity_(start_velocity), angle_(angle) ,
+		start_x_pos_(start_x_pos), start_y_pos_(start_y_pos), 
+		acñeleration_x_(acñeleration_x),añcelereation_y_(añcelereation_y),
+		start_velocity_x_(start_velocity_* cos(angle_)), start_velocity_y_(start_velocity_* sin(angle_)) {}
+
+	Parametrs(const Parametrs& other) :start_velocity_(other.start_velocity_), angle_(other.angle_),
+		start_x_pos_(other.start_x_pos_), start_y_pos_(other.start_y_pos_),
+		acñeleration_x_(other.acñeleration_x_), añcelereation_y_(other.añcelereation_y_),
+		start_velocity_x_(other.start_velocity_x_), start_velocity_y_(other.start_velocity_y_) { }
 };
+
+
 class Calculations
 {
-	Calculations();
+public:
+	Calculations(const Parametrs& parametrs);
+private:
+	Parametrs parametrs;
 };
 
