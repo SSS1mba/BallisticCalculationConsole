@@ -13,7 +13,7 @@ void ConsoleOutput::calculate_and_print(const Calculations& calculation)
 
 	std::cout << "=============================================================\n";
 	std::cout << "t\t|x\t|y\t|Vx\t|Vy\t|\n";
-	for (int time = start_time; time += time_gaps; time <= end_time)
+	for (double time = start_time; time += time_gaps; time <= end_time)
 	{
 		std::cout << time << "\t" << calculation.calculate_x_pos(time) << "\t" 
 			<< calculation.calculate_y_pos(time) << "\t" << calculation.calculate_velocity_x(time) << 
@@ -29,7 +29,7 @@ void ConsoleOutput::calculate_and_print(const Calculations& calculation)
 	std::cout << "=============================================================\n";
 }
 
-void ConsoleOutput::add_new_Parametrs(std::vector<Calculations>& vector)  
+void ConsoleOutput::add_new_parametrs(std::vector<Calculations>& vector)  
 {
 	double start_velocity, angle, start_x_pos, start_y_pos;
 	

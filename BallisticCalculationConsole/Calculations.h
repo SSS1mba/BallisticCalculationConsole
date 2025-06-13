@@ -4,6 +4,7 @@
 
 constexpr double g = 9.8;
 
+//математическая модель
 struct Parametrs
 {
 	const double start_velocity_;		 //начальная скорость броска
@@ -32,6 +33,7 @@ struct Parametrs
 		lifting_time_ (other.lifting_time_) { }
 };
 
+//класс для работы с математической моделью
 class Calculations
 {
 private:
@@ -69,7 +71,14 @@ public:
 	double calculate_y_pos(double time)const;
 	double calculate_velocity_y(double time)const;
 
-
+	inline int get_start_velocity() const noexcept
+	{
+		return parametrs_.start_velocity_;
+	}
+	inline int get_angle() const noexcept
+	{
+		return parametrs_.angle_;
+	}
 	inline double calculate_max_height()const noexcept
 	{
 		return max_height_;
