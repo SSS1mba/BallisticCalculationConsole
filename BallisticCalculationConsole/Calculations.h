@@ -3,6 +3,12 @@
 #include <iostream>
 
 constexpr double g = 9.8;
+constexpr double PI = 3.14159265358979323846;
+
+inline double degrees_in_radians(double angle_grad)  noexcept
+{
+	return angle_grad * PI / 180.0;
+}
 
 //математическая модель
 struct Parametrs
@@ -23,7 +29,7 @@ struct Parametrs
 
 		:start_velocity_(start_velocity), angle_(angle) ,
 		start_x_pos_(start_x_pos), start_y_pos_(start_y_pos),acceleration_y_(aсcelereation_y),
-		start_velocity_x_(start_velocity_* cos(angle_)), start_velocity_y_(start_velocity_* sin(angle_)),
+		start_velocity_x_(start_velocity_* cos(degrees_in_radians(angle_))), start_velocity_y_(start_velocity_* sin(degrees_in_radians(angle_))),
 		lifting_time_ (start_velocity_y_ / acceleration_y_)    { }
 
 	Parametrs(const Parametrs& other) :start_velocity_(other.start_velocity_), angle_(other.angle_),
@@ -62,7 +68,7 @@ public:
 	inline double calculate_velocity_x(double time)const
 	{
 		if (time < 0) throw std::invalid_argument("Calculations -> calculate_x_pos() -> (time < 0)");
-		if (time >= flight_time_) return 0; //тело упало - не учитваем скорость ПОСЛЕ полета
+		if (time >= flight_time_) return 0; //тело упало - не учитываем скорость ПОСЛЕ полета
 
 		//Vx = V0x + ax * t
 		return parametrs_.start_velocity_x_ + parametrs_.acceleration_x_ * time;
@@ -71,11 +77,11 @@ public:
 	double calculate_y_pos(double time)const;
 	double calculate_velocity_y(double time)const;
 
-	inline int get_start_velocity() const noexcept
+	inline double get_start_velocity() const noexcept
 	{
 		return parametrs_.start_velocity_;
 	}
-	inline int get_angle() const noexcept
+	inline double get_angle() const noexcept
 	{
 		return parametrs_.angle_;
 	}

@@ -3,7 +3,7 @@
 double Calculations::calculate_y_pos(double time) const
 {
 	if (time < 0) throw std::invalid_argument("Calculations -> calculate_x_pos() -> (time < 0)");
-	if (time >= flight_time_) return max_height_;
+	if (time >= flight_time_) return 0;
 
 	double y_pos; //y
 	if (time < flight_time_) //y = y0 + V0y * t - 0.5*ay*t*t
@@ -17,7 +17,7 @@ double Calculations::calculate_y_pos(double time) const
 double Calculations::calculate_velocity_y(double time) const
 {
 	if (time < 0) throw std::invalid_argument("Calculations -> calculate_x_pos() -> (time < 0)");
-	if (time >= flight_time_) return 0;
+	if (time >= flight_time_) return 0; //тело упало - не учитываем скорость ПОСЛЕ полета
 
 	double velocity_y; //Vy
 	if (time < flight_time_) //Vy = V0 - a*t

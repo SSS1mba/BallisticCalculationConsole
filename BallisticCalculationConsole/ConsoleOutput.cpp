@@ -13,7 +13,7 @@ void ConsoleOutput::calculate_and_print(const Calculations& calculation)
 
 	std::cout << "=============================================================\n";
 	std::cout << "t\t|x\t|y\t|Vx\t|Vy\t|\n";
-	for (double time = start_time; time += time_gaps; time <= end_time)
+	for (double time = start_time; time <= end_time; time += time_gaps)
 	{
 		std::cout << time << "\t" << calculation.calculate_x_pos(time) << "\t" 
 			<< calculation.calculate_y_pos(time) << "\t" << calculation.calculate_velocity_x(time) << 
@@ -36,7 +36,7 @@ void ConsoleOutput::add_new_parametrs(std::vector<Calculations>& vector)
 	setlocale(LC_ALL, "russian");
 	std::cout << "¬ведите начальную скорость \n";
 	std::cin >> start_velocity;
-	std::cout << "¬ведите угол броска\n";
+	std::cout << "¬ведите угол броска (в градусах, 0-90):\n";
 	std::cin >> angle;
 	std::cout << "¬ведите начальную позицию по оси x\n";
 	std::cin >> start_x_pos;
