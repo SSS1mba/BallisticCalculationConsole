@@ -1,5 +1,5 @@
-﻿
-#include "Calculations.h"
+﻿#include "Calculations.h"
+
 
 int main()
 {
