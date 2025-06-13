@@ -18,7 +18,7 @@ struct Parametrs
 	const double lifting_time_;		     //изначально(от момента t=0 до момента t = lifting_time) ускорение направлено против оси y (acceleration_y_ < 0)
 									          //но после (с t = lifting_time до конца полета t=(lifting_time * 2) ускорение сонаправлено с осью y (acceleration_y_ > 0)
 
-	Parametrs(double start_velocity, double angle, double start_x_pos, double start_y_pos, double aсcelereation_y = g)
+	Parametrs(double start_velocity, double angle, double start_x_pos = 0, double start_y_pos = 0, double aсcelereation_y = g)
 
 		:start_velocity_(start_velocity), angle_(angle) ,
 		start_x_pos_(start_x_pos), start_y_pos_(start_y_pos),acceleration_y_(aсcelereation_y),
