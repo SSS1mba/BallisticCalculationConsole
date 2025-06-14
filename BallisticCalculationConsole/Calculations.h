@@ -60,7 +60,7 @@ public:
 	inline double calculate_x_pos (double time)const
 	{
 		if (time < 0) throw std::invalid_argument("Calculations -> calculate_x_pos() -> (time < 0)");
-		if (time >= flight_time_) return flight_range_;
+		if (time > flight_time_) return flight_range_;
 
 		//x = x0 + V0x * t 
 		return ( parametrs_.start_x_pos_ ) + ( parametrs_.start_velocity_x_ * time) ;

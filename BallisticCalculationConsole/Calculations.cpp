@@ -20,10 +20,10 @@ double Calculations::calculate_velocity_y(double time) const
 	if (time >= flight_time_) return 0; //тело упало - не учитываем скорость ПОСЛЕ полета
 
 	double velocity_y; //Vy
-	if (time < flight_time_) //Vy = V0 - a*t
+	if (time < parametrs_.lifting_time_) //Vy = V0 - a*t
 		velocity_y = parametrs_.start_velocity_y_ - parametrs_.acceleration_y_ * time;
 	else					 //Vy = 0 + a*(t - flight_time_)
-		velocity_y = 0 + parametrs_.acceleration_y_ * (time - flight_time_);
+		velocity_y = 0 + parametrs_.acceleration_y_ * (time - parametrs_.lifting_time_);
 
 	return velocity_y;
 }
