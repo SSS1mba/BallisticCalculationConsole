@@ -1,7 +1,7 @@
 ﻿#include "ConsoleOutput.h"
 
 
-void console_menu()
+inline void console_menu()
 {
     std::cout << "Выберите действие:\n";
     std::cout << "1 - Создать математическую модель\n";
