@@ -122,11 +122,11 @@ public:
 	}
 
 	//Чеккеры - для проверки в Calculations
-	inline bool CHECK_start_velocity(double data) const noexcept
+	inline bool CHECK_start_velocity() const noexcept
 	{
 		return is_known_parametr_arr_[0];
 	}
-	inline bool CHECK_angle(double data) const noexcept
+	inline bool CHECK_angle() const noexcept
 	{
 		return is_known_parametr_arr_[1];
 	}
@@ -134,39 +134,39 @@ public:
 	//{
 	//	return is_known_parametr_arr_[2];
 	//}
-	inline bool CHECK_acceleration_x(double data) const noexcept
+	inline bool CHECK_acceleration_x() const noexcept
 	{
 		return is_known_parametr_arr_[3];
 	}
-	inline bool CHECK_acceleration_y(double data) const noexcept
+	inline bool CHECK_acceleration_y() const noexcept
 	{
 		return is_known_parametr_arr_[4];
 	}
-	inline bool CHECK_start_velocity_x(double data) const noexcept
+	inline bool CHECK_start_velocity_x() const noexcept
 	{
 		return is_known_parametr_arr_[5];
 	}
-	inline bool CHECK_start_velocity_y(double data) const noexcept
+	inline bool CHECK_start_velocity_y() const noexcept
 	{
 		return is_known_parametr_arr_[6];
 	}
-	inline bool CHECK_max_height(double data) const noexcept
+	inline bool CHECK_max_height() const noexcept
 	{
 		return is_known_parametr_arr_[7];
 	}
-	inline bool CHECK_flight_range(double data) const noexcept
+	inline bool CHECK_flight_range() const noexcept
 	{
 		return is_known_parametr_arr_[8];
 	}
-	inline bool CHECK_lifting_time(double data) const noexcept
+	inline bool CHECK_lifting_time() const noexcept
 	{
 		return is_known_parametr_arr_[9];
 	}
-	inline bool CHECK_fall_time_(double data) const noexcept
+	inline bool CHECK_fall_time_() const noexcept
 	{
 		return is_known_parametr_arr_[10];
 	}
-	inline bool CHECK_flight_time(double data) const noexcept
+	inline bool CHECK_flight_time() const noexcept
 	{
 		return is_known_parametr_arr_[11];
 	}
@@ -242,6 +242,24 @@ public:
 		return calculated_;
 	}
 
+	//Файндеры - методы,которые ПЫТАЮТСЯ вычислить параметр - при неудаче вернут false.Вызываются в Calculator::calculate()
+	bool FIND_start_velocity()  noexcept;
+	bool FIND_angle()  noexcept;
+	//// bool FIND_start_y_pos() const
+	//{
+	//	
+	//}
+	bool FIND_acceleration_x()  noexcept;
+	bool FIND_acceleration_y()  noexcept;
+	bool FIND_start_velocity_x()  noexcept;
+	bool FIND_start_velocity_y()  noexcept;
+	bool FIND_max_height()  noexcept;
+	bool FIND_flight_range()  noexcept;
+	bool FIND_lifting_time()  noexcept;
+	bool FIND_fall_time_()  noexcept;
+	bool FIND_flight_time()  noexcept;
+	
+
 private:
 	double* parametrs_arr_;
 	bool*   is_known_parametr_arr_;
@@ -285,8 +303,28 @@ private:
 	static double calculate_angle(const double start_velocity, const double start_velocity_x) const noexcept;
 	static double calculate_angle(const double start_velocity, const double start_velocity_y) const noexcept;
 
+	static double calculate_start_velocity_x(const double start_velocity, const double angle) const noexcept;
+	static double calculate_start_velocity_x(const double flight_range, const double flight_time,const double acceleration_x) const noexcept;
+
+	static double calculate_start_velocity_y(const double start_velocity, const double angle) const noexcept;
+	static double calculate_start_velocity_y(const double max_height, const double lifting_time, const double acceleration_y) const noexcept;
+
 	static double calculate_acceleration_y(const double start_velocity_y, const double lifting_time) const noexcept;
+
 	static double calculate_acceleration_x(const double start_velocity_x, const double flight_time, const double flight_range) const noexcept;
+
+	static double calculate_lifting_time(const double start_velocity_y, const double acceleration_y) const noexcept;
+	static double calculate_lifting_time(const double fall_time) const noexcept;
+	static double calculate_lifting_time(const double flight_time) const noexcept;
+
+	static double calculate_fall_time(const double lifting_time) const noexcept;
+	static double calculate_fall_time(const double flight_time) const noexcept;
+
+	static double calculate_flight_time(const double fall_time,const double lifting_time) const noexcept;
+
+	static double calculate_max_height(const double start_velocity_y, const double lifting_time,const double acceleration_y) const noexcept;
+
+	static double calculate_flight_range(const double start_velocity_x, const double flight_time, const double acceleration_x) const noexcept;
 };
 
 

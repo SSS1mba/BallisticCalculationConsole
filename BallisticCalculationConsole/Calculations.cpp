@@ -45,6 +45,7 @@ bool Calculator::calculate(InputArr& input_arr) const noexcept
 }
 
 
+//start_velocity
 double Calculator::calculate_start_velocity(const double angle, const double start_velocity_x) const noexcept
 {
 	return start_velocity_x/ cos(angle);
@@ -53,7 +54,27 @@ double Calculator::calculate_start_velocity(const double angle, const double sta
 {
 	return start_velocity_y / sin(angle);
 }
+bool InputArr::FIND_start_velocity() noexcept
+{
+	if (CHECK_start_velocity()) return true;
+	if (!CHECK_angle()) return false;
 
+	if (CHECK_start_velocity_x())
+	{
+		SET_start_velocity(Calculator::calculate_start_velocity(GET_angle(), GET_start_velocity_x()));
+		return true;
+	}
+	if (CHECK_start_velocity_y())
+	{
+		SET_start_velocity(Calculator::calculate_start_velocity(GET_angle(), GET_start_velocity_y()));
+		return true;
+	}
+
+	return false;
+}
+
+
+//angle
 double Calculator::calculate_angle(const double start_velocity_x, const double start_velocity_y) const noexcept
 {
 	return atan(start_velocity_y/ start_velocity_x);
@@ -66,6 +87,52 @@ double Calculator::calculate_angle(const double start_velocity, const double sta
 {
 	return acos(start_velocity_x / start_velocity);
 }
+bool InputArr::FIND_angle() noexcept
+{
+	if (CHECK_angle()) return true;
+
+	if (CHECK_start_velocity_x() && CHECK_start_velocity_y())
+	{
+		SET_angle(Calculator::calculate_angle(GET_start_velocity_x(), GET_start_velocity_y()));
+		return true;
+	}
+
+	if (CHECK_start_velocity() && CHECK_start_velocity_y())
+	{
+		SET_angle(Calculator::calculate_angle(GET_start_velocity(), GET_start_velocity_y()));
+		return true;
+	}
+
+	if (CHECK_start_velocity() && CHECK_start_velocity_x())
+	{
+		SET_angle(Calculator::calculate_angle(GET_start_velocity(), GET_start_velocity_x()));
+		return true;
+	}
+
+	return false;
+}
+
+
+//start_velocity_x
+double Calculator::calculate_start_velocity_x(const double start_velocity, const double angle) const noexcept
+{
+	return start_velocity * cos(angle);
+}
+double Calculator::calculate_start_velocity_x(const double flight_range, const double flight_time, const double acceleration_x) const noexcept
+{
+	return (flight_range - 0.5 * acceleration_x * flight_time * flight_time) / flight_time;
+}
+
+
+double Calculator::calculate_start_velocity_y(const double start_velocity, const double angle) const noexcept
+{
+	return start_velocity * sin (angle);
+}
+double Calculator::calculate_start_velocity_y(const double max_height, const double lifting_time, const double acceleration_y) const noexcept
+{
+	return (max_height + 0.5 * acceleration_y * lifting_time * lifting_time) / lifting_time;
+}
+
 
 double Calculator::calculate_acceleration_y(const double start_velocity_y, const double lifting_time) const noexcept
 {
@@ -76,3 +143,39 @@ double Calculator::calculate_acceleration_x(const double start_velocity_x, const
 	return 2 * ( (flight_range - start_velocity_x* flight_time ) / (flight_time* flight_time) );
 }
 
+double Calculator::calculate_lifting_time(const double start_velocity_y, const double acceleration_y) const noexcept
+{
+	return start_velocity_y / acceleration_y;
+}
+double Calculator::calculate_lifting_time(const double fall_time) const noexcept
+{
+	return fall_time;
+}
+static double Calculator::calculate_lifting_time(const double flight_time) const noexcept
+{
+	return flight_time / 2;
+}
+
+double Calculator::calculate_fall_time(const double lifting_time) const noexcept
+{
+	return lifting_time;
+}
+double Calculator::calculate_fall_time(const double flight_time) const noexcept
+{
+	return flight_time / 2;
+}
+
+double Calculator::calculate_flight_time(const double fall_time, const double lifting_time) const noexcept
+{
+	return fall_time + lifting_time;
+}
+
+double Calculator::calculate_max_height(const double start_velocity_y, const double lifting_time, const double acceleration_y) const noexcept
+{
+	return (start_velocity_y * lifting_time) - (0.5 * acceleration_y * lifting_time * lifting_time);
+}
+
+double Calculator::calculate_flight_range(const double start_velocity_x, const double flight_time, const double acceleration_x) const noexcept
+{
+	return (start_velocity_x * flight_time) + (0.5 * acceleration_x * flight_time * flight_time);
+}
