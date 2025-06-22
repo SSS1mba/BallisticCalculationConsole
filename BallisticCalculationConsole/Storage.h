@@ -7,7 +7,7 @@ struct Parametrs
 	const double start_velocity_;		 //начальная скорость броска
 	const double angle_;				 //угол броска
 	const double start_x_pos_ = 0;		 //начальная координата по оси x
-	const double start_y_pos_;			 //начальная координата по оси y
+	const double start_y_pos_ = 0;		 //начальная координата по оси y
 	const double acceleration_x_;        //в классической баллистике движение по x - равномерное
 	const double acceleration_y_;		 //в классической баллистике движение по y - равноускоренное
 
@@ -29,7 +29,7 @@ struct Parametrs
 class Storage
 {
 public:
-	void emplace(const InputArr& input_arr)
+	void emplace(const InputArr& input_arr);
 private:
 
 };
